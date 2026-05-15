@@ -1,0 +1,40 @@
+[package]
+name = "use-pattern"
+description = "Feature-gated facade crate for RustUse pattern helpers"
+publish = true
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+rust-version.workspace = true
+readme = "README.md"
+keywords = ["pattern", "matching", "regex", "glob", "wildcard"]
+categories = ["text-processing", "rust-patterns"]
+
+[package.metadata.docs.rs]
+all-features = true
+
+[features]
+default = []
+regex = ["dep:use-regex"]
+glob = ["dep:use-glob"]
+wildcard = ["dep:use-wildcard"]
+match = ["dep:use-match"]
+full = ["regex", "glob", "wildcard", "match"]
+
+[dependencies]
+use-glob = { workspace = true, optional = true }
+use-match = { workspace = true, optional = true }
+use-regex = { workspace = true, optional = true }
+use-wildcard = { workspace = true, optional = true }
+
+[[example]]
+name = "facade_full"
+path = "examples/facade_full.rs"
+required-features = ["full"]
+
+[lints]
+workspace = true

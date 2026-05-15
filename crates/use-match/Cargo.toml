@@ -1,0 +1,21 @@
+[package]
+name = "use-match"
+description = "Shared match-result primitives for RustUse pattern helpers"
+publish = true
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+rust-version.workspace = true
+readme = "README.md"
+keywords = ["match", "span", "text", "pattern"]
+categories = ["text-processing", "data-structures"]
+
+[lints]
+workspace = true
+
+[package.metadata.docs.rs]
+all-features = true

@@ -1,0 +1,21 @@
+[package]
+name = "use-wildcard"
+description = "Simple wildcard matching helpers for RustUse"
+publish = true
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+rust-version.workspace = true
+readme = "README.md"
+keywords = ["wildcard", "pattern", "matching", "text"]
+categories = ["text-processing"]
+
+[lints]
+workspace = true
+
+[package.metadata.docs.rs]
+all-features = true

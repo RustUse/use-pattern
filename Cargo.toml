@@ -1,0 +1,43 @@
+[workspace]
+members = [
+    "crates/use-pattern",
+    "crates/use-regex",
+    "crates/use-glob",
+    "crates/use-wildcard",
+    "crates/use-match",
+]
+resolver = "2"
+
+[workspace.package]
+authors = ["RustUse Contributors"]
+edition = "2024"
+homepage = "https://rustuse.org"
+license = "MIT OR Apache-2.0"
+documentation = "https://rustuse.org"
+publish = false
+readme = "README.md"
+repository = "https://github.com/RustUse/use-pattern"
+rust-version = "1.95.0"
+version = "0.1.0"
+
+[workspace.dependencies]
+regex = { version = "1.12", default-features = true }
+use-glob = { version = "0.1.0", path = "crates/use-glob" }
+use-match = { version = "0.1.0", path = "crates/use-match" }
+use-pattern = { version = "0.1.0", path = "crates/use-pattern" }
+use-regex = { version = "0.1.0", path = "crates/use-regex" }
+use-wildcard = { version = "0.1.0", path = "crates/use-wildcard" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.metadata.rustuse.release]
+publish = false
+versioning = "lockstep-0.x"
+first-publish-candidates = [
+    "use-match",
+    "use-regex",
+    "use-glob",
+    "use-wildcard",
+    "use-pattern",
+]
