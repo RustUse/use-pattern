@@ -23,19 +23,19 @@ fn tokenize_wildcard_pattern(pattern: &str) -> Vec<MatchToken> {
                     tokens.push(MatchToken::Literal('\\'));
                     pattern_index += 1;
                 }
-            }
+            },
             '*' => {
                 tokens.push(MatchToken::Star);
                 pattern_index += 1;
-            }
+            },
             '?' => {
                 tokens.push(MatchToken::Question);
                 pattern_index += 1;
-            }
+            },
             literal => {
                 tokens.push(MatchToken::Literal(literal));
                 pattern_index += 1;
-            }
+            },
         }
     }
 
@@ -47,7 +47,7 @@ fn escape_regex_char(character: char, output: &mut String) {
         '.' | '+' | '*' | '?' | '(' | ')' | '[' | ']' | '{' | '}' | '|' | '^' | '$' | '\\' => {
             output.push('\\');
             output.push(character);
-        }
+        },
         _ => output.push(character),
     }
 }
@@ -73,11 +73,11 @@ fn wildcard_matches_impl(pattern: &str, input: &str) -> bool {
                 MatchToken::Literal(expected) => {
                     matrix[token_index - 1][input_index - 1]
                         && input_chars[input_index - 1] == expected
-                }
+                },
                 MatchToken::Question => matrix[token_index - 1][input_index - 1],
                 MatchToken::Star => {
                     matrix[token_index - 1][input_index] || matrix[token_index][input_index - 1]
-                }
+                },
             };
         }
     }

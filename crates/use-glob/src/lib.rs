@@ -29,15 +29,15 @@ fn parse_character_class(
         match pattern_chars[pattern_index] {
             ']' if !class_chars.is_empty() => {
                 return Some((build_class_items(&class_chars), pattern_index + 1));
-            }
+            },
             '\\' if pattern_index + 1 < pattern_chars.len() => {
                 class_chars.push(pattern_chars[pattern_index + 1]);
                 pattern_index += 2;
-            }
+            },
             character => {
                 class_chars.push(character);
                 pattern_index += 1;
-            }
+            },
         }
     }
 
@@ -84,7 +84,7 @@ fn parse_glob_pattern(pattern: &str) -> Vec<MatcherToken> {
                     tokens.push(MatcherToken::Literal('/'));
                     pattern_index += 1;
                 }
-            }
+            },
             '*' => {
                 if pattern_chars.get(pattern_index + 1) == Some(&'*') {
                     tokens.push(MatcherToken::DoubleStar);
@@ -93,11 +93,11 @@ fn parse_glob_pattern(pattern: &str) -> Vec<MatcherToken> {
                     tokens.push(MatcherToken::Star);
                     pattern_index += 1;
                 }
-            }
+            },
             '?' => {
                 tokens.push(MatcherToken::Question);
                 pattern_index += 1;
-            }
+            },
             '[' => {
                 if let Some((class_items, next_index)) =
                     parse_character_class(&pattern_chars, pattern_index)
@@ -108,11 +108,11 @@ fn parse_glob_pattern(pattern: &str) -> Vec<MatcherToken> {
                     tokens.push(MatcherToken::Literal('['));
                     pattern_index += 1;
                 }
-            }
+            },
             literal => {
                 tokens.push(MatcherToken::Literal(literal));
                 pattern_index += 1;
-            }
+            },
         }
     }
 
@@ -124,7 +124,7 @@ fn escape_regex_char(character: char, output: &mut String) {
         '.' | '+' | '*' | '?' | '(' | ')' | '[' | ']' | '{' | '}' | '|' | '^' | '$' | '\\' => {
             output.push('\\');
             output.push(character);
-        }
+        },
         _ => output.push(character),
     }
 }
@@ -134,7 +134,7 @@ fn render_class_character(character: char, output: &mut String) {
         '\\' | ']' | '^' | '-' => {
             output.push('\\');
             output.push(character);
-        }
+        },
         _ => output.push(character),
     }
 }
@@ -149,7 +149,7 @@ fn render_character_class(items: &[ClassItem], output: &mut String) {
                 render_class_character(*start, output);
                 output.push('-');
                 render_class_character(*end, output);
-            }
+            },
         }
     }
 
@@ -167,7 +167,7 @@ fn class_matches(items: &[ClassItem], character: char) -> bool {
             let lower = (*start).min(*end);
             let upper = (*start).max(*end);
             (lower..=upper).contains(&character)
-        }
+        },
     })
 }
 
@@ -195,7 +195,7 @@ fn glob_matches_tokens(
                         input_index + 1,
                         memo,
                     )
-            }
+            },
             MatcherToken::Question => {
                 input_chars
                     .get(input_index)
@@ -209,7 +209,7 @@ fn glob_matches_tokens(
                         input_index + 1,
                         memo,
                     )
-            }
+            },
             MatcherToken::CharacterClass(items) => {
                 input_chars
                     .get(input_index)
@@ -223,7 +223,7 @@ fn glob_matches_tokens(
                         input_index + 1,
                         memo,
                     )
-            }
+            },
             MatcherToken::Star => {
                 glob_matches_tokens(tokens, input_chars, token_index + 1, input_index, memo)
                     || input_chars
@@ -239,7 +239,7 @@ fn glob_matches_tokens(
                                 memo,
                             )
                         })
-            }
+            },
             MatcherToken::DoubleStar => {
                 glob_matches_tokens(tokens, input_chars, token_index + 1, input_index, memo)
                     || matches!(
@@ -255,7 +255,7 @@ fn glob_matches_tokens(
                     || input_chars.get(input_index).is_some_and(|_| {
                         glob_matches_tokens(tokens, input_chars, token_index, input_index + 1, memo)
                     })
-            }
+            },
         }
     };
 
@@ -332,7 +332,7 @@ pub fn glob_to_regex(pattern: &str) -> String {
             MatcherToken::Question => regex_pattern.push_str("[^/]"),
             MatcherToken::CharacterClass(items) => {
                 render_character_class(items, &mut regex_pattern)
-            }
+            },
         }
 
         token_index += 1;
