@@ -18,15 +18,15 @@ publish = false
 readme = "README.md"
 repository = "https://github.com/RustUse/use-pattern"
 rust-version = "1.95.0"
-version = "0.1.0"
+version = "0.1.1"
 
 [workspace.dependencies]
 regex = { version = "1.12", default-features = true }
-use-glob = { version = "0.1.0", path = "crates/use-glob" }
-use-match = { version = "0.1.0", path = "crates/use-match" }
-use-pattern = { version = "0.1.0", path = "crates/use-pattern" }
-use-regex = { version = "0.1.0", path = "crates/use-regex" }
-use-wildcard = { version = "0.1.0", path = "crates/use-wildcard" }
+use-glob = { version = "0.1.1", path = "crates/use-glob" }
+use-match = { version = "0.1.1", path = "crates/use-match" }
+use-pattern = { version = "0.1.1", path = "crates/use-pattern" }
+use-regex = { version = "0.1.1", path = "crates/use-regex" }
+use-wildcard = { version = "0.1.1", path = "crates/use-wildcard" }
 
 [workspace.lints.rust]
 unsafe_code = "forbid"
