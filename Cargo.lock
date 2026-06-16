@@ -48,15 +48,15 @@ checksum = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
 
 [[package]]
 name = "use-glob"
-version = "0.1.0"
+version = "0.1.1"
 
 [[package]]
 name = "use-match"
-version = "0.1.0"
+version = "0.1.1"
 
 [[package]]
 name = "use-pattern"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "use-glob",
  "use-match",
@@ -66,11 +66,11 @@ dependencies = [
 
 [[package]]
 name = "use-regex"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "regex",
 ]
 
 [[package]]
 name = "use-wildcard"
-version = "0.1.0"
+version = "0.1.1"
